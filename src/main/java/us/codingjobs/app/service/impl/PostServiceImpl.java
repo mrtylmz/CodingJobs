@@ -1,10 +1,18 @@
 package us.codingjobs.app.service.impl;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -51,5 +59,25 @@ public class PostServiceImpl implements PostService {
 		PostDto createdDto=modelMapper.map(savedEntity, PostDto.class);
 		return createdDto;
 	}
+
+	@Override
+	public List<PostDto> getPosts(int page, int limit) {
+		List<PostDto> returnValues=new ArrayList<>();
+		Pageable pageableRequest = PageRequest.of(page, limit);
+		
+		Page<PostEntity> postsPage=postRepository.findAll(pageableRequest);
+		List<PostEntity> postEntities=postsPage.getContent();
+		//below I can handle with modelmapper
+//		for(PostEntity entity:postEntities) {
+//			PostDto postDto=new PostDto();
+//			postDto=modelMapper.map(entity, PostDto.class);
+//			returnValues.add(postDto);
+//		}
+		
+		Type listType = new TypeToken<List<PostDto>>() {}.getType();
+		returnValues=modelMapper.map(postEntities, listType);
+		return returnValues;
+	}
+
 
 }
