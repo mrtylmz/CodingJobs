@@ -8,12 +8,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+
+import us.codingjobs.app.model.request.AddressRequestModel;
+import us.codingjobs.app.model.request.CompanyRequestModel;
 
 @Entity
 @Table(name="posts")
@@ -29,8 +35,8 @@ public class PostEntity implements Serializable {
 	@Column(name="post_id",nullable=false)
 	private String postId;
 	
-	@Column(name="email_id",nullable=false,length=50)
-	private String emailId;
+	@Column(name="email",nullable=false,length=50)
+	private String email;
 	@Column(name="position",nullable=false,length=100)
 	private String position;
 	
@@ -50,7 +56,7 @@ public class PostEntity implements Serializable {
 	private String collectorEmail;
 	
 	@Column(name="company_info",length=300)
-	private String companyInfo;
+	private String companyInfoStr;
 	
 	@Column(name="state",length=50)
 	private String state;
@@ -75,7 +81,27 @@ public class PostEntity implements Serializable {
 	@Column(name="last_updated_dt")
 	private Date lastUpdtDt;
 
+	@Transient
+	private CompanyRequestModel companyInfo;
+	@Transient
+	private AddressRequestModel address;
 	
+	public CompanyRequestModel getCompanyInfo() {
+		return companyInfo;
+	}
+
+	public void setCompanyInfo(CompanyRequestModel companyInfo) {
+		this.companyInfo = companyInfo;
+	}
+
+	public AddressRequestModel getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressRequestModel address) {
+		this.address = address;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -92,12 +118,13 @@ public class PostEntity implements Serializable {
 		this.postId = postId;
 	}
 
-	public String getEmailId() {
-		return emailId;
+
+	public String getEmail() {
+		return email;
 	}
 
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPosition() {
@@ -148,12 +175,13 @@ public class PostEntity implements Serializable {
 		this.collectorEmail = collectorEmail;
 	}
 
-	public String getCompanyInfo() {
-		return companyInfo;
+
+	public String getCompanyInfoStr() {
+		return companyInfoStr;
 	}
 
-	public void setCompanyInfo(String companyInfo) {
-		this.companyInfo = companyInfo;
+	public void setCompanyInfoStr(String companyInfoStr) {
+		this.companyInfoStr = companyInfoStr;
 	}
 
 	public String getState() {
@@ -204,6 +232,14 @@ public class PostEntity implements Serializable {
 		this.isActive = isActive;
 	}
 
-	
-	
+	@PrePersist
+	protected void onCreate() {
+		createdDt = new Date();
+	}
+
+	@PreUpdate
+	protected void onUpdate() {
+		lastUpdtDt = new Date();
+	}
+
 }

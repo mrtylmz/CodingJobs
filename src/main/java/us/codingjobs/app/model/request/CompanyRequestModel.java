@@ -26,6 +26,10 @@ public class CompanyRequestModel {
 	public void setCompanyLogoPath(String companyLogoPath) {
 		this.companyLogoPath = companyLogoPath;
 	}
+	@Override
+	public String toString() {
+		return getCompanyName()+"|"+getCompanyWebsite()+"|"+getCompanyLogoPath();
+	}
 	
 	
 	

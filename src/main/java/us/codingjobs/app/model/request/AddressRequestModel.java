@@ -26,6 +26,10 @@ public class AddressRequestModel {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
+	@Override
+	public String toString() {
+		return getCity()+"|"+getState()+"|"+getZipCode();
+	}
 	
 	
 }

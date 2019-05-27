@@ -12,13 +12,13 @@ public class PostRequestModel {
 
 	//this should be corporate email address. Not public email provider
 	@Email
-	private String emailId;
+	private String email;
 	
 	//Sr. Java Developer etc...
 	@Size(min=5,max=100,message="Position must be between 5 to 100 characters")
 	private String position;
 	
-	@Size(min=100,message="Job Details must be more than 100 characters")
+	@Size(min=5,message="Job Details must be more than 5 characters")
 	private String jobDetails;
 	
 	//fulltime, contractor, remote
@@ -42,14 +42,14 @@ public class PostRequestModel {
 	private AddressRequestModel address;
 	
 	
-	public String getEmailId() {
-		return emailId;
-	}
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
-	}
 	public String getPosition() {
 		return position;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public void setPosition(String position) {
 		this.position = position;

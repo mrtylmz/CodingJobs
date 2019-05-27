@@ -10,7 +10,7 @@ import us.codingjobs.app.entity.PostEntity;
 @Repository
 public interface PostRepository extends JpaRepository<PostEntity, Long> {
 	
-	@Query("select p from PostEntity p where p.emailId=:emailId and p.position=:position and p.zipCode=:zipCode")
-	public PostEntity checkExistingPost(@Param("emailId") String emailId,
+	@Query("select p from PostEntity p where p.email=:email and p.position=:position and p.zipCode=:zipCode")
+	public PostEntity checkExistingPost(@Param("email") String email,
 			@Param("position") String position,@Param("zipCode") String zipCode);
 }

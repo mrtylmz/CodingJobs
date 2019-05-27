@@ -3,6 +3,8 @@ package us.codingjobs.app.model.dto;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import us.codingjobs.app.business.validation.WebsiteOrCollectorEmailNonNull;
 import us.codingjobs.app.model.request.AddressRequestModel;
 import us.codingjobs.app.model.request.CompanyRequestModel;
@@ -15,7 +17,7 @@ public class PostDto implements Serializable {
 
 	private Long id;
 	private String postId;
-	private String emailId;
+	private String email;
 	private String position;
 	private String jobDetails;
 	private String jobType;
@@ -36,12 +38,6 @@ public class PostDto implements Serializable {
 	}
 	public void setPostId(String postId) {
 		this.postId = postId;
-	}
-	public String getEmailId() {
-		return emailId;
-	}
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
 	}
 	public String getPosition() {
 		return position;
@@ -90,6 +86,12 @@ public class PostDto implements Serializable {
 	}
 	public void setAddress(AddressRequestModel address) {
 		this.address = address;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	
