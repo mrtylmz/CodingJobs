@@ -2,6 +2,8 @@
 Backend: 
 Java, Spring Boot, Hibernate, JPA
 
+
+
 #NotImplemented
-FrontEnd:
-Angular
+Business Rule Engine
+FrontEnd:Angular
